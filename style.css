@@ -171,7 +171,7 @@ main section.view2 .container > p {
   color: var(--light-dark);
   padding-bottom: 2.5rem;
 }
-main section.view2 .container > div {
+main section.view2 .container .button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -184,10 +184,11 @@ main section.view2 .container > div {
   border-radius: 50px;
   cursor: pointer;
 }
-main section.view2 .container > div svg {
+main section.view2 .container .button svg {
   width: 1rem;
+  height: 1rem;
 }
-main section.view2 .container > div div {
+main section.view2 .container .button div {
   font-size: 1rem;
   font-weight: 500;
   padding: 0;
@@ -458,11 +459,8 @@ main section.view8 .container div:nth-child(2) {
     color: var(--black-text);
     font-size: 4rem;
   }
-  main section.view2 .container p {
+  main section.view2 .container .button {
     font-size: 1.8rem;
-    width: 50%;
-  }
-  main section.view2 .container div {
     background-color: rgb(9, 9, 10);
   }
   main section.view3 .container h1 {
