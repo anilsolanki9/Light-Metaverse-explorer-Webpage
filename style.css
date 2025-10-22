@@ -171,12 +171,12 @@ main section.view2 .container > p {
   color: var(--light-dark);
   padding-bottom: 2.5rem;
 }
-main section.view2 .container div {
+main section.view2 .container > div {
   display: flex;
   justify-content: center;
-  width: -moz-fit-content;
-  width: fit-content;
-  gap: 1rem;
+  align-items: center;
+  width: -moz-max-content;
+  width: max-content;
   padding: 1rem 1.5rem;
   background-color: #292d30;
   color: white;
@@ -184,12 +184,14 @@ main section.view2 .container div {
   border-radius: 50px;
   cursor: pointer;
 }
-main section.view2 .container div svg {
+main section.view2 .container > div svg {
   width: 1rem;
 }
-main section.view2 .container div p {
+main section.view2 .container > div div {
   font-size: 1rem;
   font-weight: 500;
+  padding: 0;
+  padding-left: 1rem;
 }
 main section.view3 .container {
   display: flex;
