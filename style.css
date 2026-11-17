@@ -1,557 +1,892 @@
-@font-face {
-  font-family: clashG;
-  src: url(./assets/ClashGrotesk-Semibold.ttf);
-}
-:root {
-  --black: #0a0a0b;
-  --gray: #c5c6cb;
-  --light-dark: #292d30;
-  --black-text: #0e0f10;
-}
-
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: clash;
+  src: url(./assets/ClashGrotesk-Semibold.woff2) format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
 html,
 body {
   width: 100%;
   height: 100%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-html {
-  font-size: clamp(14px, 1vw + 0.25rem, 18px);
-  scroll-behavior: smooth;
-}
-
-body {
-  background-color: var(--black);
-  color: white;
+  color: #f9f9ff;
+  background-color: #09090a;
 }
 
 main {
   width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
-main section {
+
+a {
+  color: #f9f9ff;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+section {
   width: 100%;
-  display: flex;
-  justify-content: center;
+  position: relative;
 }
-main section > div {
+section .abs {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+section .abs .inner {
   width: 100%;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
-  max-width: 1500px;
 }
-main section.view1 .container {
+section article {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+section article .inner {
+  width: 100%;
+}
+
+section#navbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 99;
+}
+section#navbar article {
+  padding-inline: 1rem;
+}
+section#navbar article .inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-block: 1.5rem;
 }
-main section.view1 .container .left {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.5rem 1rem 0.5rem 0.6rem;
-  border-radius: 0.3rem;
-  color: var(--gray);
+section#navbar article .inner .left {
+  padding-inline: 8px;
+  padding-block: 6px;
+}
+section#navbar article .inner .left svg {
+  height: 2rem;
+  width: 6rem;
   cursor: pointer;
 }
-main section.view1 .container .left img {
-  width: 2.1rem;
-}
-main section.view1 .container .left p {
-  font-size: 1.7rem;
-}
-main section.view1 .container .left:hover {
-  background-color: rgba(186, 186, 186, 0.237);
-}
-main section.view1 .container .mid {
-  align-items: center;
-  display: flex;
+section#navbar article .inner .mid {
+  display: none;
   gap: 2rem;
-  font-size: 1rem;
-  display: none;
-  justify-content: center;
-  padding-left: 10rem;
-}
-main section.view1 .container .mid p {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  cursor: pointer;
-}
-main section.view1 .container .mid p svg {
-  align-self: flex-end;
-  width: 1rem;
-}
-main section.view1 .container .mid p:nth-child(1):hover {
-  color: var(--gray);
-}
-main section.view1 .container .right {
-  display: flex;
-  gap: 1rem;
-  display: none;
-  justify-content: flex-end;
-}
-main section.view1 .container .right div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.7rem 0.9rem;
-  border-radius: 0.3rem;
-  gap: 0.4rem;
-  cursor: pointer;
-}
-main section.view1 .container .right div i {
-  align-self: flex-end;
-}
-main section.view1 .container .right div:nth-child(1):hover {
-  background-color: rgba(220, 220, 220, 0.4352941176);
-}
-main section.view1 .container .right div:nth-child(2) {
-  background-color: white;
-  color: var(--light-dark);
-}
-main section.view1 .container .right div:nth-child(2) svg {
-  width: 1rem;
-}
-main section.view1 .container .right div:nth-child(2):hover {
-  background-color: rgb(215, 215, 215);
-  color: var(--light-dark);
-}
-main section.view2 {
-  position: relative;
-}
-main section.view2 > img {
-  position: absolute;
-  width: 100%;
-  max-width: 1500px;
-}
-main section.view2 .below {
-  z-index: -2;
-  visibility: hidden;
-  bottom: 0;
-}
-main section.view2 .above {
-  z-index: -1;
-  max-width: 1600px;
-  bottom: 0;
-}
-main section.view2 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 3rem;
-  padding-bottom: 15rem;
-}
-main section.view2 .container img {
-  width: 7rem;
-  padding-bottom: 3rem;
-}
-main section.view2 .container h1 {
-  width: 100%;
   text-align: center;
-  font-size: 2.6rem;
-  line-height: 1;
-  font-family: clashG;
-  padding-bottom: 1.5rem;
-  color: #7b7d82;
 }
-main section.view2 .container > p {
-  width: 87%;
-  text-align: center;
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: var(--light-dark);
-  padding-bottom: 2.5rem;
-}
-main section.view2 .container .button {
+section#navbar article .inner .mid a {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: -moz-max-content;
-  width: max-content;
-  padding: 1rem 1.5rem;
-  background-color: #292d30;
-  color: white;
-  margin: 2rem 0;
-  border-radius: 50px;
-  cursor: pointer;
+  align-items: end;
 }
-main section.view2 .container .button svg {
-  width: 1rem;
-  height: 1rem;
-}
-main section.view2 .container .button div {
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 0;
-  padding-left: 1rem;
-}
-main section.view3 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 8rem;
-  position: relative;
-}
-main section.view3 .container > img {
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  top: 0;
-}
-main section.view3 .container h4 {
-  font-weight: 500;
-  font-size: 1.2rem;
-  padding: 0.5rem 1.3rem;
-  border: 1px solid white;
-  border-radius: 50px;
-}
-main section.view3 .container h1 {
-  font-size: 2.5rem;
-  font-family: clashG;
-  text-align: center;
-  padding: 1rem 0;
-}
-main section.view3 .container p {
-  width: 95%;
-  font-size: 1.3rem;
-  text-align: center;
-  color: rgba(222, 226, 237, 0.509);
-}
-main section.view3 .container div {
-  position: relative;
-  display: flex;
-  justify-content: center;
-}
-main section.view3 .container div img {
-  width: 75%;
-}
-main section.view3 .container div .bg-image {
-  position: absolute;
-  z-index: -1;
-}
-main section.view4 .container .grid-container {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: repeat(6, auto);
-}
-main section.view4 .container .grid-container .item {
-  width: 100%;
-}
-main section.view4 .container .grid-container .item p:nth-child(1) {
-  color: #7b7d82;
-  font-weight: 600;
-}
-main section.view4 .container .grid-container .item img {
-  width: 100%;
-  padding: 3rem 0;
-}
-main section.view4 .container .grid-container .item h2 {
-  font-size: 1.7rem;
-  font-family: clashG;
-  margin-top: 1rem;
-  color: #f3f4f6;
-}
-main section.view4 .container .grid-container .item .subpara {
-  color: #7b7d82;
-  font-size: 1.3rem;
-  padding: 1rem 0;
-}
-main section.view4 .container .grid-container .item1 .para {
-  padding-bottom: 3rem;
-}
-main section.view4 .container .grid-container .item1 .inner-grid {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 1.8rem 2.18rem;
-}
-main section.view4 .container .grid-container .item1 .inner-grid h3 {
-  color: #f9f9ff;
-  font-weight: 600;
-}
-main section.view4 .container .grid-container .item1 .inner-grid p {
-  font-size: 1.1rem;
-}
-main section.view5 .container div.box > p {
-  color: #7b7d82;
-  font-weight: 600;
-}
-main section.view5 .container div.box h1 {
-  padding-top: 1rem;
-  padding-bottom: 4rem;
-  font-family: clashG;
-}
-main section.view5 .container div.box .grid {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: repeat(4, auto);
-  gap: 1rem;
-}
-main section.view5 .container div.box .grid .item {
-  padding: 1.5rem 1.2rem;
-  background-color: #0e0f10;
-  border: 0.2px solid #292d30;
-  border-radius: 1rem;
-}
-main section.view5 .container div.box .grid .item p {
-  color: #7b7d82;
-  font-weight: 600;
-}
-main section.view5 .container div.box .grid .item h2 {
-  padding-top: 1rem;
-}
-main section.view5 .container div.box .grid .item ul {
-  list-style: none;
-}
-main section.view5 .container div.box .grid .item img {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-main section.view6 {
-  position: relative;
-}
-main section.view6 > img {
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  max-width: 1500px;
-  visibility: hidden;
-  bottom: 0;
-}
-main section.view6 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 8rem;
-  padding-bottom: 2rem;
-}
-main section.view6 .container img {
-  width: 7rem;
-  padding-bottom: 2.8rem;
-}
-main section.view6 .container h1 {
-  width: 100%;
-  text-align: center;
-  font-size: 2.1rem;
-  line-height: normal;
-  font-family: clashG;
-  padding-bottom: 1.5rem;
-  color: var(--black-text);
-}
-main section.view6 .container > p {
-  width: 87%;
-  text-align: center;
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: var(--light-dark);
-  padding-bottom: 2.5rem;
-}
-main section.view6 .container div {
-  display: flex;
-  justify-content: center;
-  width: -moz-fit-content;
-  width: fit-content;
-  gap: 1rem;
-  padding: 1rem 1.5rem;
-  background-color: #292d30;
-  color: white;
-  margin: 1rem 0;
-  border-radius: 50px;
-  cursor: pointer;
-}
-main section.view6 .container div svg {
-  width: 1rem;
-}
-main section.view6 .container div p {
-  font-size: 1rem;
-  font-weight: 500;
-}
-main section.view7 {
-  background-color: #0a0a0b;
-}
-main section.view7 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 3.5rem;
-  padding-top: 3rem;
-}
-main section.view7 .container .top div:nth-child(1) {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding-bottom: 3rem;
-}
-main section.view7 .container .top div:nth-child(1) img {
-  width: 3rem;
-}
-main section.view7 .container .top div:nth-child(1) p {
-  font-size: 2rem;
+section#navbar article .inner .mid a:hover {
   color: #c5c6cb;
 }
-main section.view7 .container .top div:nth-child(2) {
-  display: flex;
+section#navbar article .inner .mid a svg {
+  height: 1rem;
+  width: 1rem;
+  margin-left: 4px;
+  margin-bottom: 1px;
+}
+section#navbar article .inner .right {
+  display: none;
+  justify-content: end;
+  align-items: center;
   gap: 1rem;
 }
-main section.view7 .container .top div:nth-child(2) i {
-  font-size: 2rem;
+section#navbar article .inner .right a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: 0.375rem;
+  border: none;
+  padding: 0.5rem 1rem;
+  transition: all ease 0.3s;
+  line-height: 1.5rem;
+}
+section#navbar article .inner .right a svg {
+  margin-right: 0.5rem;
+  margin-left: -2px;
+  height: 1rem;
+  width: 1rem;
+}
+section#navbar article .inner .right a.discord {
+  display: none;
+  background-color: transparent;
+}
+section#navbar article .inner .right a.discord:hover {
+  background-color: #7b7d82;
+}
+section#navbar article .inner .right a.explore {
+  color: #0e0f10;
+  background-color: #f9f9ff;
+}
+section#navbar article .inner .right a.explore:hover {
+  background-color: #c5c6cb;
+}
+
+section#section1 {
+  position: relative;
+  height: 100%;
+  text-align: center;
+}
+section#section1 .abs {
+  inset-inline: 0;
+  text-align: center;
+  z-index: 0;
+}
+section#section1 .abs .inner {
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  max-height: -moz-max-content;
+  max-height: max-content;
+  border: 0;
+  margin: 0 auto;
+  padding: 0;
+  left: 0;
+  right: 0;
+}
+section#section1 .abs .inner img.sun,
+section#section1 .abs .inner img.dots {
+  position: relative;
+  display: block;
+  pointer-events: none;
+  -o-object-position: center top;
+     object-position: center top;
+  margin: 0 auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  border: none;
+}
+section#section1 .abs.abs1 .inner {
+  visibility: hidden;
+  top: 8rem;
+}
+section#section1 .abs.abs1 .inner img.sun {
+  z-index: 1;
+}
+section#section1 .abs.abs2 .inner {
+  bottom: 0;
+}
+section#section1 .abs.abs2 .inner img.dots {
+  z-index: 1;
+}
+section#section1 article {
+  position: relative;
+  margin: 0 auto;
+  padding-inline: 1rem;
+  padding-top: 8rem;
+  padding-bottom: 12rem;
+}
+section#section1 article .inner {
+  position: relative;
+  z-index: 20;
+  padding-inline: 2rem;
+  text-align: center;
+}
+section#section1 article .inner .logo-container img {
+  width: 6rem;
+  height: 6rem;
+}
+section#section1 article .inner h1 {
+  margin-top: 2rem;
+  font-family: clash;
+  color: #0e0f10;
+  font-size: 2.25rem;
+  line-height: 1;
+  letter-spacing: -1.8px;
+}
+section#section1 article .inner p {
+  margin-inline: auto;
+  margin-block: 1.125rem 3rem;
+  max-width: 36rem;
+  font-size: 1.25rem;
+  color: #292d30;
+}
+section#section1 article .inner button {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50px;
+  background: #09090a;
+  padding-block: 0.75rem;
+  padding-inline: 1.5rem;
+  color: #f9f9ff;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  line-height: 2.25rem;
+}
+section#section1 article .inner button svg {
+  margin-right: 0.5rem;
+  margin-left: -2px;
+  height: 1rem;
+  width: 1rem;
+}
+section#section1 article .inner button:hover {
+  background-color: #212528;
+}
+
+section#section2 {
+  text-align: center;
+  position: relative;
+}
+section#section2 .abs {
+  width: 100%;
+  inset: 0;
+}
+section#section2 .abs .inner {
+  width: 100%;
+}
+section#section2 .abs .inner .sunset {
+  width: 100%;
+}
+section#section2 article {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  padding-top: 8rem;
+}
+section#section2 article .inner .content-part div {
+  width: -moz-min-content;
+  width: min-content;
+  margin: 0 auto;
+}
+section#section2 article .inner .content-part button {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50px;
+  color: #f9f9ff;
+  background-color: transparent;
+  border: 0.8px solid currentColor;
+  padding: 0.25rem 0.75rem;
+  font-size: 1rem;
+  line-height: 24px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+section#section2 article .inner .content-part h2 {
+  margin-top: 0.75rem;
+  font-family: clash;
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #f9f9ff;
+  line-height: 40px;
+}
+section#section2 article .inner .content-part p {
+  margin-inline: auto;
+  margin-top: 1.25rem;
+  max-width: 36rem;
+  font-size: 1.125rem;
   color: #7b7d82;
 }
-main section.view7 .container .bottom {
+section#section2 article .inner .image-part {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
+section#section2 article .inner .image-part img.planet {
+  display: inline-block;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  margin-block: auto;
+  width: initial;
+  height: initial;
+  max-width: 100%;
+}
+section#section2 article .inner .image-part img.cat {
+  display: inline-block;
+  position: relative;
+  inset: 0;
+  z-index: 10;
+  margin-block: auto;
+  width: initial;
+  height: initial;
+  max-width: 100%;
+}
+
+section#section3 {
+  overflow: hidden;
+  padding-block: 4rem;
+  position: relative;
+}
+section#section3 .abs {
+  visibility: hidden;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+section#section3 .abs .inner {
+  position: absolute;
+  width: -moz-max-content;
+  width: max-content;
+}
+section#section3 .abs .inner.inner-r {
+  left: 100%;
+  top: 0;
+  transform: translate(-27%, 27%);
+}
+section#section3 .abs .inner.inner-r .right {
+  height: 1080px;
+  width: 1080px;
+}
+section#section3 .abs .inner.inner-l {
+  right: 100%;
+  bottom: 0;
+  transform: translate(27%, -7%);
+}
+section#section3 .abs .inner.inner-l .left {
+  height: 1080px;
+  width: 1080px;
+}
+section#section3 article {
+  position: relative;
+  margin-block: auto;
+  padding-inline: 1rem;
+}
+section#section3 article .inner {
   display: flex;
   flex-direction: column;
   gap: 3rem;
 }
-main section.view7 .container .bottom > div {
+section#section3 article .inner .part {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  font-size: larger;
+  align-items: center;
 }
-main section.view7 .container .bottom > div .heading {
-  color: #43484d;
-  font-weight: 600;
-}
-main section.view7 .container .bottom > div .item {
+section#section3 article .inner .part .content .title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
   color: #7b7d82;
 }
-main section.view8 .container div.line {
-  height: 0.5px;
+section#section3 article .inner .part .content h3 {
+  margin-top: 0.75rem;
+  font-family: clash;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  line-height: 2rem;
+  color: #f9f9ff;
+}
+section#section3 article .inner .part .content p {
+  margin-top: 0.75rem;
+  font-size: 1.125rem;
+  color: #7b7d82;
+}
+section#section3 article .inner .part .content .features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 2.5rem;
+  gap: 2rem;
+}
+section#section3 article .inner .part .content .features div h4 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  color: #f9f9ff;
+}
+section#section3 article .inner .part .content .features div p {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #7b7d82;
+}
+section#section3 article .inner .part .image {
+  margin-inline: -1rem;
+  margin-top: 2.5rem;
+}
+section#section3 article .inner .part .content,
+section#section3 article .inner .part .image {
   width: 100%;
-  background-color: #292d30;
-  margin: 2rem 0;
 }
-main section.view8 .container div:nth-child(2) {
-  font-size: 1.2rem;
-  color: #7b7d82;
-  padding-bottom: 5rem;
+section#section3 article .inner .part .content img,
+section#section3 article .inner .part .image img {
+  width: 100%;
 }
 
-@media (min-width: 600px) {
-  main section > div {
-    width: 90%;
+section#section4 {
+  padding-inline: 1rem;
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+}
+section#section4 article .inner p.title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  color: #7b7d82;
+  text-transform: uppercase;
+  text-align: left;
+}
+section#section4 article .inner h3 {
+  margin-top: 0.75rem;
+  font-family: clash;
+  font-size: 1.875rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: white;
+}
+section#section4 article .inner .grid {
+  margin-top: 4rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+section#section4 article .inner .grid .box {
+  border-radius: 0.75rem;
+  border: 1px solid #292d30;
+  background-color: #0e0f10;
+  padding: 1rem;
+  color: #f9f9ff;
+  cursor: pointer;
+  transition: border-color ease 0.3s;
+}
+section#section4 article .inner .grid .box:hover {
+  border-color: #7b7d82;
+}
+section#section4 article .inner .grid .box .title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #7b7d82;
+}
+section#section4 article .inner .grid .box h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+section#section4 article .inner .grid .box h4:first-of-type {
+  margin-top: 0.75rem;
+}
+section#section4 article .inner .grid .box img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+section#section5 {
+  position: relative;
+}
+section#section5 .abs .inner {
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  max-width: 100%;
+  min-width: 100%;
+}
+section#section5 .abs .inner img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+section#section5 article {
+  width: 100%;
+}
+section#section5 article .inner {
+  margin: 0 auto;
+  max-width: 80rem;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+section#section5 article .inner .logo-container {
+  margin: 0 auto;
+  width: 6rem;
+}
+section#section5 article .inner .logo-container img {
+  display: block;
+  margin: 0 auto;
+  height: initial;
+  width: initial;
+  max-width: 100%;
+}
+section#section5 article .inner h2 {
+  margin-top: 2rem;
+  font-family: clash;
+  font-size: 1.875rem;
+  font-weight: 800;
+  letter-spacing: -0.025rem;
+  color: #0e0f10;
+  line-height: 2.5rem;
+}
+section#section5 article .inner button {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50px;
+  background: #09090a;
+  padding-block: 0.75rem;
+  padding-inline: 1.25rem;
+  color: #f9f9ff;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-top: 2.5rem;
+}
+section#section5 article .inner button svg {
+  margin-right: 0.5rem;
+  margin-left: -2px;
+  height: 1rem;
+  width: 1rem;
+}
+section#section5 article .inner button:hover {
+  background-color: #212528;
+}
+
+section#footer article .inner {
+  margin: 0 auto;
+  max-width: 80rem;
+  padding-inline: 1rem;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+}
+section#footer article .inner .top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+section#footer article .inner .top .left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+section#footer article .inner .top .left a.logo {
+  display: inline-flex;
+  align-items: center;
+  padding-bottom: 0.75rem;
+}
+section#footer article .inner .top .left a.logo svg {
+  height: 2.5rem;
+  width: auto;
+}
+section#footer article .inner .top .left .socials {
+  display: flex;
+  gap: 1.5rem;
+}
+section#footer article .inner .top .left .socials a {
+  color: #7b7d82;
+}
+section#footer article .inner .top .left .socials a:hover {
+  color: #c5c6cb;
+}
+section#footer article .inner .top .left .socials a svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+section#footer article .inner .top .right {
+  flex: 1;
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+section#footer article .inner .top .right div h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  color: #515357;
+}
+section#footer article .inner .top .right div p {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #7b7d82;
+  cursor: pointer;
+}
+section#footer article .inner .top .right div p:hover {
+  color: #c5c6cb;
+}
+section#footer article .inner .bottom {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #292d30;
+  font-size: 1rem;
+  color: #7b7d82;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  section .abs .inner,
+  section article {
+    max-width: 640px !important;
+  }
+  section#navbar article {
+    padding-inline: 1.5rem;
+  }
+  section#section1 article .inner {
+    padding-inline: 4rem;
+  }
+  section#section1 article .inner h1 {
+    font-size: 3rem;
+  }
+  section#section2 article .inner .content-part h2 {
+    letter-spacing: -0.9px;
+  }
+  section#section3 .abs {
+    max-width: 640px;
+  }
+  section#section3 article {
+    padding-inline: 1.5rem;
+  }
+  section#section3 article .inner .part .content h3 {
+    letter-spacing: -1.5px;
+    line-height: 60px;
+    font-size: 3.75rem;
+  }
+  section#section4 {
+    padding-inline: 1.5rem;
+  }
+  section#section5 article .inner {
+    padding: 3rem 1.5rem;
+  }
+  section#footer article .inner {
+    padding-inline: 1.5rem;
   }
 }
 @media (min-width: 768px) {
-  main section > div {
-    width: 100%;
+  section .abs .inner,
+  section article {
+    max-width: 768px !important;
   }
-  main section.view1 .container .right {
+  section#navbar article .inner {
+    justify-content: flex-start;
+  }
+  section#navbar article .inner .left svg {
+    height: 2.5rem;
+    width: 7rem;
+  }
+  section#navbar article .inner .mid {
     display: flex;
   }
-  main section.view2 .below {
+  section#navbar article .inner .right {
+    flex: 1;
+    display: flex;
+  }
+  section#navbar article .inner .mid,
+  section#navbar article .inner .right {
+    margin-left: 2.5rem;
+  }
+  section#section1 .abs.abs1 .inner {
     visibility: visible;
+    top: -12rem;
   }
-  main section.view2 .container img {
-    padding-top: 7rem;
+  section#section1 .abs.abs2 .inner {
+    bottom: 0;
   }
-  main section.view2 .container h1 {
-    color: var(--black-text);
-    font-size: 4rem;
+  section#section1 article {
+    padding-block: 6rem;
   }
-  main section.view2 .container .button {
-    font-size: 1.8rem;
-    background-color: rgb(9, 9, 10);
-  }
-  main section.view3 .container h1 {
-    font-size: 4.5rem;
-  }
-  main section.view3 .container p {
+  section#section2 article .inner .content-part p {
     font-size: 1.5rem;
-    width: 45%;
   }
-  main section.view5 .container div.box h1 {
-    font-size: 3.5rem;
+  section#section3 .abs {
+    max-width: 768px;
   }
-  main section.view5 .container div.box .grid {
-    grid-template-columns: repeat(3, minmax(230px, 1fr));
-    grid-template-rows: repeat(2, auto);
-    grid-template-areas: "first second third" "first second fourth";
+  section#section3 article .inner {
+    gap: 4rem;
   }
-  main section.view5 .container div.box .grid .item h2 {
-    font-size: 2rem;
+  section#section3 article .inner .part .content p {
+    font-size: 1.5rem;
   }
-  main section.view5 .container div.box .grid .item1 {
-    grid-area: first;
+  section#section4 article .inner h3 {
+    font-size: 3.75rem;
   }
-  main section.view5 .container div.box .grid .item2 {
-    grid-area: second;
+  section#section4 article .inner .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
   }
-  main section.view5 .container div.box .grid .item3 {
-    grid-area: third;
+  section#section4 article .inner .grid .box1,
+  section#section4 article .inner .grid .box2 {
+    grid-row: 1/3;
   }
-  main section.view5 .container div.box .grid .item4 {
-    grid-area: fourth;
+  section#section5 .abs .inner {
+    opacity: 1;
   }
-  main section.view6 > img {
-    visibility: visible;
+  section#section5 article .inner h2 {
+    font-size: 2.25rem;
   }
-  main section.view6 .container h1 {
-    font-size: 3.5rem;
-  }
-  main section.view6 .container div {
-    background-color: rgb(9, 9, 10);
-  }
-  main section.view7 .container .bottom {
-    width: 80%;
-    flex-direction: row;
-    justify-content: space-between;
+  section#footer article .inner .top .right {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
   }
 }
 @media (min-width: 1024px) {
-  main section.view1 .container .mid {
-    display: flex;
+  section .abs .inner,
+  section article {
+    max-width: 1024px !important;
   }
-  main section.view4 .container .grid-container {
-    grid-template-columns: 50% 50%;
-    grid-template-rows: repeat(3, auto);
-    align-items: center;
-    grid-template-areas: "one two" "three four" "five six";
+  section#navbar article .inner .left {
+    flex: 1;
   }
-  main section.view4 .container .grid-container .item h2 {
-    font-size: 3.5rem;
+  section#navbar article .inner .right a.discord {
+    display: inline-flex;
   }
-  main section.view4 .container .grid-container .item .inner-grid h3 {
-    font-size: 1.5rem;
+  section#section1 article {
+    padding-block: 8rem;
+    padding-inline: 2rem;
   }
-  main section.view4 .container .grid-container .item1 {
-    grid-area: one;
+  section#section1 article .inner .logo-container img {
+    width: 8rem;
+    height: 8rem;
   }
-  main section.view4 .container .grid-container .item2 {
-    grid-area: two;
+  section#section1 article .inner h1 {
+    font-size: 3rem;
   }
-  main section.view4 .container .grid-container .item3 {
-    grid-area: four;
+  section#section1 article .inner p {
+    font-size: 1.875rem;
   }
-  main section.view4 .container .grid-container .item4 {
-    grid-area: three;
+  section#section2 article {
+    padding-top: 12rem;
   }
-  main section.view4 .container .grid-container .item5 {
-    grid-area: five;
+  section#section2 article .inner .image-part {
+    width: 960px;
   }
-  main section.view4 .container .grid-container .item6 {
-    grid-area: six;
+  section#section3 {
+    padding-block: 6rem;
   }
-  main section.view4 .container .grid-container .text {
-    padding-left: 1.5rem;
+  section#section3 .abs {
+    visibility: visible;
+    max-width: 1024px;
   }
-  main section.view7 .container {
+  section#section3 article {
+    padding-inline: 2rem;
+  }
+  section#section3 article .inner {
+    gap: 6rem;
+  }
+  section#section3 article .inner .part {
     flex-direction: row;
     justify-content: space-between;
   }
-  main section.view7 .container .bottom {
-    width: 60%;
+  section#section3 article .inner .part.part2 {
+    flex-direction: row-reverse;
+  }
+  section#section3 article .inner .part .content {
+    padding-right: 1rem;
+  }
+  section#section3 article .inner .part .image {
+    margin-top: 0;
+  }
+  section#section3 article .inner .part .content,
+  section#section3 article .inner .part .image {
+    min-height: 49%;
+    width: 49%;
+    max-width: 49%;
+  }
+  section#section4 {
+    padding-inline: 2rem;
+    padding-top: 6rem;
+    padding-bottom: 7rem;
+  }
+  section#section4 article .inner .grid {
+    gap: 2rem;
+  }
+  section#section4 article .inner .grid .box {
+    padding: 2rem;
+  }
+  section#section4 article .inner .grid .box h4 {
+    font-size: 1.875rem;
+  }
+  section#section5 article .inner {
+    padding: 8rem 2rem;
+  }
+  section#section5 article .inner .logo-container {
+    width: 8rem;
+  }
+  section#footer article .inner {
+    padding-inline: 2rem;
+    padding-block: 4rem;
+  }
+}
+@media (min-width: 1280px) {
+  section .abs .inner,
+  section article {
+    max-width: 1280px !important;
+  }
+  section#section1 .abs.abs1 .inner {
+    top: -12rem;
+  }
+  section#section1 .abs.abs2 .inner {
+    bottom: 8rem;
+  }
+  section#section1 article {
+    padding-block: 20rem 16rem;
+  }
+  section#section1 article .inner h1 {
+    font-size: 4.5rem;
+  }
+  section#section2 article .inner .content-part h2 {
+    letter-spacing: -1.8px;
+    font-size: 4.5rem;
+    line-height: 4.5rem;
+  }
+  section#section3 .abs {
+    max-width: 1280px;
+  }
+  section#section5 article .inner h2 {
+    font-size: 3.75rem;
+    line-height: 60px;
+    letter-spacing: -1.5px;
+  }
+  section#footer article .inner .top {
     flex-direction: row;
-    justify-content: space-between;
+    gap: 0rem;
+  }
+  section#footer article .inner .top .right {
+    margin-top: 0rem;
+  }
+  section#footer article .inner .bottom {
+    font-size: 1.25rem;
+    text-align: left;
+  }
+}
+@media (min-width: 1536px) {
+  section .abs .inner,
+  section article {
+    max-width: 1536px !important;
+  }
+  section#section1 .abs.abs1 .inner {
+    max-width: 1920px !important;
+    top: -24rem;
+  }
+  section#section1 .abs.abs2 .inner {
+    max-width: 1920px !important;
+    top: 10rem;
+  }
+  section#section3 .abs {
+    max-width: 1536px;
+  }
+  section#section5 .abs .inner {
+    text-align: center;
+  }
+  section#section5 .abs .inner img {
+    margin: 0 auto;
+    max-width: 1920px;
   }
 }/*# sourceMappingURL=style.css.map */
